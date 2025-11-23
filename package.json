@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "jest --coverage",
+    "lint": "npx eslint . --ext .ts,.html --fix --no-cache",
+    "format": "prettier --write \"src/**/*.{ts,html,scss}\""
   },
   "private": true,
   "dependencies": {
@@ -27,15 +29,27 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.1.0",
+    "@angular-eslint/builder": "^21.0.0",
+    "@angular-eslint/eslint-plugin": "^21.0.0",
+    "@angular-eslint/eslint-plugin-template": "^21.0.0",
+    "@angular-eslint/template-parser": "^21.0.0",
     "@angular/cli": "^19.1.0",
     "@angular/compiler-cli": "^19.1.0",
-    "@types/jasmine": "~5.1.0",
-    "jasmine-core": "~5.5.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
+    "@types/jest": "^29.5.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
+    "json-server": "^1.0.0-beta.3",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.1.1",
     "typescript": "~5.7.2"
+  },
+  "lint-staged": {
+    "*.{ts,html,scss}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
