@@ -9,10 +9,8 @@ export const ROUTES: Routes = [
       {
         path: 'categorias',
         loadChildren: () =>
-          import('../categorias/categoria.routes').then(
-            m => m.ROUTES
-          ),
-      }
-    ]
+          import('../categorias/categoria.routes').then((m) => m.ROUTES),
+      },
+    ],
   },
 ];

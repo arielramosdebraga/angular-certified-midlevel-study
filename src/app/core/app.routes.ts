@@ -4,6 +4,6 @@ export const routes: Routes = [
   {
     path: 'paginas',
     loadChildren: () =>
-      import('@pages/template/template.routes').then(m => m.ROUTES),
+      import('@pages/template/template.routes').then((m) => m.ROUTES),
   },
 ];
