@@ -10,7 +10,7 @@ module.exports = defineConfig([
     files: ['**/*.ts'],
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.app.json', './tsconfig.spec.json'],
+        project: ['tsconfig.app.json', 'tsconfig.spec.json'],
         ecmaVersion: 2020,
         sourceType: 'module',
       },
