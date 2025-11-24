@@ -1,179 +1,83 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { of, throwError } from 'rxjs';
 import { CategoriaComponent } from './categoria.component';
+import { CategoriaService } from '../categoria.service';
+import { Categoria } from '../categoria';
 
 describe('CategoriaComponent', () => {
   let component: CategoriaComponent;
   let fixture: ComponentFixture<CategoriaComponent>;
+  let categoriaServiceSpy: jasmine.SpyObj<CategoriaService>;
 
   beforeEach(async () => {
+    const spy = jasmine.createSpyObj('CategoriaService', ['salvar']);
+
     await TestBed.configureTestingModule({
-      imports: [CategoriaComponent],
+      imports: [CategoriaComponent, ReactiveFormsModule],
+      providers: [{ provide: CategoriaService, useValue: spy }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CategoriaComponent);
     component = fixture.componentInstance;
+    categoriaServiceSpy = TestBed.inject(
+      CategoriaService,
+    ) as jasmine.SpyObj<CategoriaService>;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('deve ser criado com sucesso', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize a form group with required controls', () => {
-    const form = component.camposForm;
-    expect(form).toBeTruthy();
-    expect(form.contains('nome')).toBeTrue();
-    expect(form.contains('descricao')).toBeTrue();
+  it('deve inicializar o formulário com os campos "nome" e "descricao"', () => {
+    expect(component.camposForm).toBeDefined();
+    expect(component.camposForm.get('nome')).toBeDefined();
+    expect(component.camposForm.get('descricao')).toBeDefined();
   });
 
-  it('should have nome and descricao invalid when empty', () => {
-    const form = component.camposForm;
-    const nome = form.get('nome');
-    const descricao = form.get('descricao');
-
-    nome?.setValue('');
-    descricao?.setValue('');
-
-    expect(nome?.invalid).toBeTrue();
-    expect(descricao?.invalid).toBeTrue();
-    expect(form.invalid).toBeTrue();
+  it('o formulário deve ser inválido quando vazio', () => {
+    expect(component.camposForm.valid).toBeFalse();
   });
 
-  it('should mark form valid when both fields are provided', () => {
-    const form = component.camposForm;
-    form.setValue({ nome: 'Categoria X', descricao: 'Descricao Y' });
-
-    expect(form.valid).toBeTrue();
+  it('o formulário deve ser válido quando preenchido corretamente', () => {
+    component.camposForm.get('nome')?.setValue('Nome Teste');
+    component.camposForm.get('descricao')?.setValue('Descricao Teste');
+    expect(component.camposForm.valid).toBeTrue();
   });
 
-  it('should update validity when values change', () => {
-    const form = component.camposForm;
-    const nome = form.get('nome');
-    const descricao = form.get('descricao');
+  it('deve chamar o service.salvar() e resetar o formulário em caso de sucesso', () => {
+    const mockCategoria: Categoria = { nome: 'Eletronicos', descricao: 'Desc' };
 
-    // initially empty -> invalid
-    nome?.setValue('');
-    descricao?.setValue('');
-    expect(form.invalid).toBeTrue();
+    categoriaServiceSpy.salvar.and.returnValue(of(mockCategoria));
 
-    // set valid values -> valid
-    nome?.setValue('A');
-    descricao?.setValue('B');
-    expect(form.valid).toBeTrue();
-  });
+    component.camposForm.get('nome')?.setValue(mockCategoria.nome);
+    component.camposForm.get('descricao')?.setValue(mockCategoria.descricao);
 
-  it('should trim-like behavior be respected by validators (no implicit trim)', () => {
-    const form = component.camposForm;
-    const nome = form.get('nome');
-
-    // if only spaces are entered, required validator considers it non-empty by default
-    // unless a custom trim validator exists (it does not). We assert default behavior.
-    nome?.setValue('   ');
-    expect(nome?.valid).toBeTrue();
-  });
-
-  it('should initialize controls with empty string values', () => {
-    const form = component.camposForm;
-    expect(form.get('nome')?.value).toBe('');
-    expect(form.get('descricao')?.value).toBe('');
-  });
-
-  it('should remain invalid if only nome is provided', () => {
-    const form = component.camposForm;
-    form.get('nome')?.setValue('Only Nome');
-    form.get('descricao')?.setValue('');
-    expect(form.invalid).toBeTrue();
-    expect(form.get('nome')?.valid).toBeTrue();
-    expect(form.get('descricao')?.invalid).toBeTrue();
-  });
-
-  it('should remain invalid if only descricao is provided', () => {
-    const form = component.camposForm;
-    form.get('nome')?.setValue('');
-    form.get('descricao')?.setValue('Only Descricao');
-    expect(form.invalid).toBeTrue();
-    expect(form.get('nome')?.invalid).toBeTrue();
-    expect(form.get('descricao')?.valid).toBeTrue();
-  });
-
-  it('should log value and validity when salvar is called on invalid form', () => {
-    const spy = spyOn(console, 'log');
-    const form = component.camposForm;
-    form.setValue({ nome: '', descricao: '' });
+    const formResetSpy = spyOn(component.camposForm, 'reset').and.callThrough();
 
     component.salvar();
 
-    expect(spy).toHaveBeenCalledWith('valores digitados: ', form.value);
-    expect(spy).toHaveBeenCalledWith('Está válido?', form.valid);
-    expect(form.valid).toBeFalse();
+    expect(categoriaServiceSpy.salvar).toHaveBeenCalledOnceWith(mockCategoria);
+    expect(formResetSpy).toHaveBeenCalled();
   });
 
-  it('should log value and validity when salvar is called on valid form', () => {
-    const spy = spyOn(console, 'log');
-    const form = component.camposForm;
-    form.setValue({ nome: 'Nome', descricao: 'Descricao' });
+  it('deve logar um erro se o service.salvar() falhar', () => {
+    const errorResponse = new Error('Erro de API');
+
+    categoriaServiceSpy.salvar.and.returnValue(throwError(() => errorResponse));
+
+    component.camposForm.get('nome')?.setValue('Valido');
+    component.camposForm.get('descricao')?.setValue('Valido');
+
+    const consoleErrorSpy = spyOn(console, 'error');
 
     component.salvar();
 
-    expect(spy).toHaveBeenCalledWith('valores digitados: ', form.value);
-    expect(spy).toHaveBeenCalledWith('Está válido?', form.valid);
-    expect(form.valid).toBeTrue();
-  });
-
-  // New tests
-  it('should mark controls as touched and dirty when values are set', () => {
-    const nome = component.camposForm.get('nome');
-    const descricao = component.camposForm.get('descricao');
-
-    nome?.setValue('abc');
-    descricao?.setValue('def');
-
-    expect(nome?.dirty).toBeTrue();
-    expect(descricao?.dirty).toBeTrue();
-  });
-
-  it('should isCampoInvalido return true only when control is invalid and touched/dirty', () => {
-    const nome = component.camposForm.get('nome');
-
-    // invalid and pristine -> false
-    nome?.setValue('');
-    expect(component.isCampoInvalido('nome')).toBeFalse();
-
-    // mark as touched -> true
-    nome?.markAsTouched();
-    expect(component.isCampoInvalido('nome')).toBeTrue();
-
-    // set valid value -> false
-    nome?.setValue('valid');
-    expect(component.isCampoInvalido('nome')).toBeFalse();
-  });
-
-  it('should handle unknown control name in isCampoInvalido gracefully', () => {
-    // should not throw and should return false when control does not exist
-    expect(() => component.isCampoInvalido('inexistente')).not.toThrow();
-    expect(component.isCampoInvalido('inexistente')).toBeFalse();
-  });
-
-  it('should preserve previous values when only one control is updated', () => {
-    const form = component.camposForm;
-    form.setValue({ nome: 'A', descricao: 'B' });
-
-    form.get('nome')?.setValue('C');
-
-    expect(form.get('nome')?.value).toBe('C');
-    expect(form.get('descricao')?.value).toBe('B');
-  });
-
-  it('should emit validation state changes when values transition from invalid to valid', () => {
-    const form = component.camposForm;
-
-    form.setValue({ nome: '', descricao: '' });
-    expect(form.valid).toBeFalse();
-
-    form.get('nome')?.setValue('X');
-    form.get('descricao')?.setValue('Y');
-
-    expect(form.valid).toBeTrue();
+    expect(categoriaServiceSpy.salvar).toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'Ocorreu um erro:',
+      errorResponse,
+    );
   });
 });

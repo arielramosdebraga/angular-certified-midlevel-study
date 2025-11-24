@@ -1,6 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { LayoutComponent } from './layout.component';
+import { Component } from '@angular/core';
+
+@Component({ selector: 'app-router-outlet', template: '' })
+class MockRouterOutletComponent {}
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -8,7 +11,7 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LayoutComponent],
+      imports: [LayoutComponent, MockRouterOutletComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutComponent);
@@ -16,7 +19,12 @@ describe('LayoutComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('deve criar o componente de layout com sucesso', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('deve conter a tag router-outlet no template', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });
