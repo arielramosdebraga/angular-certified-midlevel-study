@@ -10,6 +10,13 @@ export const ROUTES: Routes = [
         path: 'categorias',
         loadChildren: () =>
           import('../categorias/categoria.routes').then((m) => m.ROUTES),
+        pathMatch: 'full',
+      },
+      {
+        path: 'lugares',
+        loadChildren: () =>
+          import('../lugares/lugar.routes').then((m) => m.ROUTES),
+        pathMatch: 'full',
       },
     ],
   },
