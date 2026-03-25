@@ -1,21 +1,20 @@
 ---
 difficulty: 2
 training: true
-chapter: "Chapter 7: RxJs Observables"
+chapter: "Chapter 8: Angular Forms"
 tags: angular
 ---
 
-# Use RxJs Observables to Display Data
+# Add Filters to our Movies App
 
 # Challenge Description
-In this challenge, our lead developer decided to update `movies.service.ts` to make it return Observables instead of Signals.
-As a result, we have to update our components to use Observables instead of Signals.
+In this challenge, we want to add filters to the UI so users can look for specific movies by title and year of release.
 
 ## Requirements
-- Update `src/home/home.component.ts` to make it handle the new Observable and render the list of all movies.
-> 💡 HINT: Remember the `async` pipe? Now is a good time to use it!
-- Update `MovieDetailsComponent` to make it handle the new Observable and render movie details.
-- The app should work just like it did before with no visible difference to the user.
+- Capture user input in the form using some of the tools described in our lesson.
+> 💡 HINT: Is this a complex form or a simple one? What's the easiest approach to get a form's value?
+- Use the `filterMovieList` from `movies.service` to get an Observable of filtered movies based on user input.
+- Display a filtered list of movies to the user.
 
 ## Other Considerations
 
@@ -25,4 +24,4 @@ As a result, we have to update our components to use Observables instead of Sign
 
 This is an example of what the functionality should look like for the completed exercise. If you’d like to mimic this style, feel free to do so, but it is not required.
 
-![Finished app in this challenge](https://images.certificates.dev/chapter71-screenshot.gif)
+![Finished app in this challenge](https://images.certificates.dev/chapter81-screenshot.gif)
