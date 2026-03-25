@@ -1,10 +1,12 @@
-import { Component, input } from '@angular/core';
+import {Component, input} from '@angular/core';
 import { Movie } from '../model/movie.model';
+import { HighlightDirective } from '../highlight.directive';
 
 @Component({
   selector: 'app-movie-item',
+  imports: [HighlightDirective],
   template: `
-    <div class="movie-item">
+    <div class="movie-item" appHighlight>
       <div>
         <h4>{{ movie().title }}</h4>
         <small class="subtitle">
@@ -16,9 +18,9 @@ import { Movie } from '../model/movie.model';
       <button>Details</button>
     </div>
   `,
-  styleUrls: ['movie-item.component.scss']
+  styleUrls: [ 'movie-item.component.scss' ]
 })
 export class MovieItemComponent {
-  movie = input.required<Movie>();
+  movie  = input.required<Movie>();
 }
 

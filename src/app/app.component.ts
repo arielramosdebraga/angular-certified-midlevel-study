@@ -1,7 +1,7 @@
-import { Component, inject, Signal } from '@angular/core';
-import { MovieItemComponent } from './movie-item/movie-item.component';
-import { Movie } from './model/movie.model';
-import { MoviesService } from './services/movies.service';
+import {Component, inject, Signal} from '@angular/core';
+import {MovieItemComponent} from './movie-item/movie-item.component';
+import {Movie} from './model/movie.model';
+import {MoviesService} from './services/movies.service';
 
 
 @Component({
@@ -13,7 +13,6 @@ import { MoviesService } from './services/movies.service';
 })
 export class AppComponent {
 
-  private moviesService = inject(MoviesService);
+  protected movies: Signal<Movie[]> = inject(MoviesService).getMovies();
 
-  movies: Signal<Movie[]> = this.moviesService.getMovies();
 }
