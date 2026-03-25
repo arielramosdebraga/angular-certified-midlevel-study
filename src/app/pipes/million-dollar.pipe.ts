@@ -1,21 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'millionDollar',
-  standalone: true
+  name: 'millionDollar'
 })
 export class MillionDollarPipe implements PipeTransform {
-
-  transform(value: string | null | undefined): string {
-    if (!value) return '';
-
-    // caso seja intervalo
-    if (value.includes('-')) {
-      const [min, max] = value.split('-');
-      return `$${min} to $${max} million`;
+  transform(amount?: string | number): string {
+    let range = ""+amount;
+    let split = range?.split("-") ?? [];
+    if (split.length > 1) {
+      range = split[0] + " to $" + split[1];
     }
-
-    // caso simples
-    return `$${value} million`;
+    return `$${ range } million`
   }
 }
