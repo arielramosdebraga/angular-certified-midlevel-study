@@ -10,7 +10,7 @@ export class FavoritesService {
   private favorites = signal<Movie[]>([]);
 
   toggleFavorite(movie: Movie): void {
-    let index = this.favorites().findIndex((m) => m.id === movie.id);
+    const index = this.favorites().findIndex((m) => m.id === movie.id);
     if (index == -1) {
       this.favorites.set([...this.favorites(), movie]);
     } else {

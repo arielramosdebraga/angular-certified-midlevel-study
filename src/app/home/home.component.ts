@@ -29,10 +29,10 @@ export class HomeComponent {
   protected movies$: Observable<Movie[]> = this.moviesService.getMovies();
   protected favoritesService = inject(FavoritesService);
 
-filterMovies() {
-  this.movies$ = this.moviesService.filterMovieList(
-    this.title,
-    this.releaseDate?.toString() ?? ''
-  );
-}
+  filterMovies() {
+    this.movies$ = this.moviesService.filterMovieList(
+      this.title,
+      this.releaseDate?.toString() ?? ''
+    );
+  }
 }

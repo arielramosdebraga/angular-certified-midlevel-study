@@ -46,6 +46,6 @@ export function getByDataTest<T>(id: string, fixture: ComponentFixture<T>): Debu
  */
 export function click<T>(element: DebugElement, fixture: ComponentFixture<T>) {
   const el = element.nativeElement;
-  el.dispatchEvent(new Event("click"));
+  el.dispatchEvent(new Event('click'));
   fixture.detectChanges();
 }

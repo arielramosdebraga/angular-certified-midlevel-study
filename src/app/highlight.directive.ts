@@ -6,7 +6,7 @@ import {Directive,HostBinding,HostListener} from '@angular/core';
 export class HighlightDirective {
 
   @HostBinding('class.highlight')
-  highlight: boolean = false;
+    highlight: boolean = false;
 
   @HostListener('mouseover')
   onMouseOver(): void {
