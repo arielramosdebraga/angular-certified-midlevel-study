@@ -2,7 +2,7 @@ import {Component, input, output} from '@angular/core';
 import { Movie } from '../model/movie.model';
 import {MillionDollarPipe} from '../pipes/million-dollar.pipe';
 import {MinToDurationPipe} from '../pipes/min-to-duration.pipe';
-import { RouterLink } from '@angular/router';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-movie-item',
@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
         <h4>
           <span class="icon-star" [class.active]="isFavorite()" (click)="toggleFavorite.emit(movie())"></span>
           {{ movie().title }}
-        </h4>vvvcc
+        </h4>
         <small class="subtitle">
           <span>Release date: {{ movie().release_date }}</span>
           <span>Budget:  {{ movie().budget | millionDollar }} </span>
@@ -20,7 +20,7 @@ import { RouterLink } from '@angular/router';
         </small>
       </div>
 
-      <button [routerLink]="['/details', movie().id]"> Details </button>
+      <button [routerLink]="'details/'+ movie().id">Details</button>
     </div>
   `,
   imports: [
@@ -28,6 +28,7 @@ import { RouterLink } from '@angular/router';
     MinToDurationPipe,
     RouterLink
   ],
+  styleUrls: ['movie-item.component.scss']
 })
 export class MovieItemComponent {
   movie  = input.required<Movie>();
