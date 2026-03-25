@@ -1,59 +1,36 @@
-# System
+---
+difficulty: 1
+training: true
+chapter: "Chapter 2: Angular Components"
+tags: angular
+---
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.0.
+# Create a Component Driven by Inputs
 
-## Development server
+# Challenge Description
+In this challenge, let's create a movie item component that receives `Movie` information as an input.
 
-To start a local development server, run:
+## Requirements
+- Open `src/movie-item/movie-item.component.ts`
+- Add a required input of type `Movie` (see sample movie provided in `src/app.component.ts`)
+- Update the provided HTML template to render the movie:
+  - Title
+  - Release date (no formatting needed)
+  - Budget ($ {value} million - for instance: $ 50 million)
+  - Duration ({value} min - for instance: 152 min)
+- Update `src/app.component.html` to pass the sample `movie` as an input
+- Ensure your component is displayed properly on the screen
 
-```bash
-ng serve
-```
+> 💡 HINT: Review our self-study content if you get stuck at any step
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+## Other Considerations
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- If you see the `data-test` attribute anywhere in the boilerplate don't remove it.
+- Mini.css is preinstalled with the default config. It might be helpful for you, if you want to have some styles. (Not required)
 
-```bash
-ng generate component component-name
-```
+## Example of Finished Component
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This is an example of what the functionality should look like for the completed exercise. If you’d like to mimic this style, feel free to do so, but it is not required.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+![Finished app in this challenge](https://api.certificates.dev/repositories/assets/QW5ndWxhci1DZXJ0aWZpY2F0aW9uL3RyYWluaW5nLWNvZGUtY2hhbGxlbmdlLWNoYXB0ZXIxLTEvc2NyZWVuc2hvdC5wbmc=)
