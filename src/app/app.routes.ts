@@ -1,8 +1,28 @@
 import { Routes } from '@angular/router';
-import {HomeComponent} from './home/home.component';
-
+import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 
 export const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'details/:id', loadComponent: () => import('./movie-details/movie-details.component').then((m) => m.MovieDetailsComponent)}
+  // Redireciona raiz para movies
+  { path: '', redirectTo: 'movies', pathMatch: 'full' },
+
+  // Lista de filmes
+  {
+    path: 'movies',
+    component: MoviesListComponent,
+  },
+
+  // Detalhes do filme
+  {
+    path: 'movies/details/:id',
+    loadComponent: () =>
+      import('./movies/movie-details/movie-details.component').then((m) => m.MovieDetailsComponent),
+  },
+
+  // Seleção de carros (lazy load)
+  // {
+  //   path: 'cars',
+  //   loadComponent: () =>
+  //     import('./cars/cars.component')
+  //       .then(m => m.CarsComponent)
+  // }
 ];

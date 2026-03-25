@@ -1,12 +1,10 @@
-import {computed, Injectable, Signal, signal} from '@angular/core';
-import {Movie} from '../model/movie.model';
-
+import { computed, Injectable, Signal, signal } from '@angular/core';
+import { Movie } from '../models/movie.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FavoritesService {
-
   private favorites = signal<Movie[]>([]);
 
   toggleFavorite(movie: Movie): void {
@@ -20,6 +18,6 @@ export class FavoritesService {
   }
 
   isFavorite(movie: Movie): Signal<boolean> {
-    return computed(() => (this.favorites().find((m) => m.id === movie.id) != null));
+    return computed(() => this.favorites().find((m) => m.id === movie.id) != null);
   }
 }

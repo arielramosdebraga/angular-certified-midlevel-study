@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
-import { MillionDollarPipe } from '../pipes/million-dollar.pipe';
-import { MinToDurationPipe } from '../pipes/min-to-duration.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from '../services/movies.service';
+import { MillionDollarPipe } from '../../shared/pipes/million-dollar.pipe';
+import { MinToDurationPipe } from '../../shared/pipes/min-to-duration.pipe';
 
 @Component({
   selector: 'app-movie-details',
