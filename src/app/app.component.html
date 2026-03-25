@@ -1,5 +1,6 @@
 <div class="container">
   @for(movie of movies(); track movie.id) {
-    <app-movie-item [movie]="movie" />
+    <app-movie-item [movie]="movie" appHighlight />
   }
 </div>
+

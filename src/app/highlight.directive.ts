@@ -1,20 +1,20 @@
-import { Directive, HostBinding, HostListener } from '@angular/core';
+import {Directive,HostBinding,HostListener} from '@angular/core';
 
 @Directive({
   selector: '[appHighlight]'
 })
 export class HighlightDirective {
-  @HostBinding('style.backgroundColor') backgroundColor = '';
 
-  @HostBinding('style.transition') transition = 'background-color 150ms ease';
+  @HostBinding('class.highlight')
+  highlight: boolean = false;
 
-  @HostListener('mouseenter')
-  onMouseEnter() {
-    this.backgroundColor = 'gold';
+  @HostListener('mouseover')
+  onMouseOver(): void {
+    this.highlight = true;
   }
 
-  @HostListener('mouseleave')
-  onMouseLeave() {
-    this.backgroundColor = '';
+  @HostListener('mouseout')
+  onMouseOut(): void {
+    this.highlight = false;
   }
 }
