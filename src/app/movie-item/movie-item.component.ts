@@ -2,6 +2,7 @@ import {Component, input, output} from '@angular/core';
 import { Movie } from '../model/movie.model';
 import {MillionDollarPipe} from '../pipes/million-dollar.pipe';
 import {MinToDurationPipe} from '../pipes/min-to-duration.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-movie-item',
@@ -9,14 +10,9 @@ import {MinToDurationPipe} from '../pipes/min-to-duration.pipe';
     <div class="movie-item">
       <div>
         <h4>
-          <span 
-            class="icon-star" 
-            [class.active]="isFavorite()" 
-            (click)="onToggle()">
-          </span>
-
+          <span class="icon-star" [class.active]="isFavorite()" (click)="toggleFavorite.emit(movie())"></span>
           {{ movie().title }}
-        </h4>
+        </h4>vvvcc
         <small class="subtitle">
           <span>Release date: {{ movie().release_date }}</span>
           <span>Budget:  {{ movie().budget | millionDollar }} </span>
@@ -24,23 +20,18 @@ import {MinToDurationPipe} from '../pipes/min-to-duration.pipe';
         </small>
       </div>
 
-      <button>Details</button>
+      <button [routerLink]="['/details', movie().id]"> Details </button>
     </div>
   `,
   imports: [
     MillionDollarPipe,
-    MinToDurationPipe
+    MinToDurationPipe,
+    RouterLink
   ],
-  styleUrls: ['movie-item.component.scss']
 })
 export class MovieItemComponent {
   movie  = input.required<Movie>();
-  isFavorite = input.required<boolean>();
-
-  toggle = output<Movie>();
-
-  onToggle() {
-    this.toggle.emit(this.movie());
-  }
+  isFavorite = input<boolean>(false);
+  toggleFavorite = output<Movie>();
 }
 
