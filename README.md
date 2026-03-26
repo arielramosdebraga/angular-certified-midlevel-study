@@ -81,10 +81,12 @@ A aplicação permite filtrar filmes dinamicamente com base nos inputs do usuár
 ## 🧩 Services
 
 ### MoviesService
+
 - Busca lista de filmes
 - Filtra filmes com base em título e ano
 
 ### FavoritesService
+
 - Gerencia filmes favoritos usando **Signals**
 - Permite adicionar/remover favoritos
 - Compartilha estado entre componentes

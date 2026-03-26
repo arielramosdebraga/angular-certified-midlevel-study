@@ -22,7 +22,7 @@ const MOCKS: Mock[] = [
       const options = {
         'e80d5a37-620e-4be2-92b9-fb1f5262494f': {
           id: 'e80d5a37-620e-4be2-92b9-fb1f5262494f',
-          title: 'Harry Potter and the Philosopher\'s Stone',
+          title: "Harry Potter and the Philosopher's Stone",
           duration: '152',
           budget: '125',
           release_date: '2001-11-04',
@@ -44,7 +44,7 @@ const MOCKS: Mock[] = [
           poster: 'https://www.wizardingworld.com/images/products/films/rectangle-2.png',
           producers: ['Chris Columbus', 'David Heyman', 'Mark Radcliffe'],
           summary:
-            'Harry\'s second year at Hogwarts begins with a series of mishaps when he and Ron miss the train to Hogwarts. Furthermore, a mysterious Chamber of Secrets has been opened inside Hogwarts and students are getting petrified one after the another. Harry, Ron and Hermione start to uncover the dark tale behind the chamber using a diary Harry found, which leads them into the lair of an Acromantula. Ginny gets kidnapped and it is up to Harry to save her and the school from the monster of the Chamber of Secrets.',
+            "Harry's second year at Hogwarts begins with a series of mishaps when he and Ron miss the train to Hogwarts. Furthermore, a mysterious Chamber of Secrets has been opened inside Hogwarts and students are getting petrified one after the another. Harry, Ron and Hermione start to uncover the dark tale behind the chamber using a diary Harry found, which leads them into the lair of an Acromantula. Ginny gets kidnapped and it is up to Harry to save her and the school from the monster of the Chamber of Secrets.",
         },
         'ab80790f-0f6d-4ca7-bd7e-e7e1f06e6982': {
           id: 'ab80790f-0f6d-4ca7-bd7e-e7e1f06e6982',
@@ -109,7 +109,7 @@ const MOCKS: Mock[] = [
           poster: 'https://www.wizardingworld.com/images/products/films/rectangle-7.png',
           producers: ['David Heyman', 'David Barron', 'J. K. Rowling'],
           summary:
-            'After Dumbledore\'s death, it is up to Harry, Ron, and Hermione to seek out the remaining Horcruxes and destroy them if they hope to defeat Voldemort. Each of them is passed on something from Dumbledore as clues to finding the Horcruxes. On their own, without the guidance of their professors or the protection of Professor Dumbledore, the three friends must now rely on one another more than ever. After managing to recover and destroy Slytherin’s locket, one of the Horcruxes, Hermione discovers about the Deathly Hallows from the book Dumbledore passed on to her. Will Harry be able to stop Voldemort if he recovers all the deathly hallows and becomes the Master of Death?',
+            "After Dumbledore's death, it is up to Harry, Ron, and Hermione to seek out the remaining Horcruxes and destroy them if they hope to defeat Voldemort. Each of them is passed on something from Dumbledore as clues to finding the Horcruxes. On their own, without the guidance of their professors or the protection of Professor Dumbledore, the three friends must now rely on one another more than ever. After managing to recover and destroy Slytherin’s locket, one of the Horcruxes, Hermione discovers about the Deathly Hallows from the book Dumbledore passed on to her. Will Harry be able to stop Voldemort if he recovers all the deathly hallows and becomes the Master of Death?",
         },
         'ffa6d8a5-4054-46ca-b8e6-9945283c8f18': {
           id: 'ffa6d8a5-4054-46ca-b8e6-9945283c8f18',
@@ -173,7 +173,7 @@ const MOCKS: Mock[] = [
       return [
         {
           id: 'e80d5a37-620e-4be2-92b9-fb1f5262494f',
-          title: 'Harry Potter and the Philosopher\'s Stone',
+          title: "Harry Potter and the Philosopher's Stone",
           duration: '152',
           budget: '125',
           release_date: '2001-11-04',

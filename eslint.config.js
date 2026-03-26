@@ -18,6 +18,15 @@ module.exports = tseslint.config(
       prettier,
     ],
     processor: angular.processInlineTemplates,
+    languageOptions: {
+      globals: {
+        jest: true,
+        describe: true,
+        it: true,
+        expect: true,
+        beforeEach: true,
+      },
+    },
     rules: {
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-empty-object-type': 'error',
@@ -27,7 +36,10 @@ module.exports = tseslint.config(
 
       'prefer-const': 'error',
       'no-var': 'error',
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
 
       semi: ['error', 'always'],
       quotes: ['error', 'single'],

@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'minToDuration'
+  name: 'minToDuration',
 })
 export class MinToDurationPipe implements PipeTransform {
   transform(minutes?: number): string {
