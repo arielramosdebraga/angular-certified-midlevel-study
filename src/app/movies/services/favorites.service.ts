@@ -1,8 +1,8 @@
-import { computed, Injectable, Signal, signal } from '@angular/core';
-import { Movie } from '../models/movie.model';
+import { computed, Injectable, Signal, signal } from "@angular/core";
+import { Movie } from "../models/movie.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class FavoritesService {
   private favorites = signal<Movie[]>([]);

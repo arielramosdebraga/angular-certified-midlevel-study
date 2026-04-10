@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MoviesListComponent } from './movies-list.component';
-import { MoviesService } from '../services/movies.service';
-import { of, Observable } from 'rxjs';
-import { Movie } from '../models/movie.model';
-import { ActivatedRoute } from '@angular/router';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { MoviesListComponent } from "./movies-list.component";
+import { MoviesService } from "../services/movies.service";
+import { of, Observable } from "rxjs";
+import { Movie } from "../models/movie.model";
+import { ActivatedRoute } from "@angular/router";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
-describe('MoviesListComponent', () => {
+describe("MoviesListComponent", () => {
   let component: MoviesListComponent;
   let fixture: ComponentFixture<MoviesListComponent>;
 
@@ -17,11 +17,11 @@ describe('MoviesListComponent', () => {
 
   const mockMovies: Movie[] = [
     {
-      id: '1',
-      title: 'Batman',
+      id: "1",
+      title: "Batman",
       duration: 120,
       budget: 100,
-      release_date: '2020-01-01',
+      release_date: "2020-01-01",
     },
   ];
 
@@ -55,31 +55,31 @@ describe('MoviesListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create and initialize movies$', (done) => {
+  it("should create and initialize movies$", (done) => {
     expect(component).toBeTruthy();
     expect(moviesServiceMock.getMovies).toHaveBeenCalled();
 
-    component['movies$'].subscribe((movies) => {
+    component["movies$"].subscribe((movies) => {
       expect(movies).toEqual(mockMovies);
       done();
     });
   });
 
-  it('should filter movies with releaseDate', () => {
-    component['title'] = 'Batman';
-    component['releaseDate'] = 2020;
+  it("should filter movies with releaseDate", () => {
+    component["title"] = "Batman";
+    component["releaseDate"] = 2020;
 
     component.filterMovies();
 
-    expect(moviesServiceMock.filterMovieList).toHaveBeenCalledWith('Batman', '2020');
+    expect(moviesServiceMock.filterMovieList).toHaveBeenCalledWith("Batman", "2020");
   });
 
-  it('should filter movies without releaseDate', () => {
-    component['title'] = 'Batman';
-    component['releaseDate'] = undefined as unknown as number;
+  it("should filter movies without releaseDate", () => {
+    component["title"] = "Batman";
+    component["releaseDate"] = undefined as unknown as number;
 
     component.filterMovies();
 
-    expect(moviesServiceMock.filterMovieList).toHaveBeenCalledWith('Batman', '');
+    expect(moviesServiceMock.filterMovieList).toHaveBeenCalledWith("Batman", "");
   });
 });

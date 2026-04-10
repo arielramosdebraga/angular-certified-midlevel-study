@@ -1,18 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
-import { MovieItemComponent } from './movie-item.component';
-import { Movie } from '../models/movie.model';
-import { ActivatedRoute } from '@angular/router';
+import { MovieItemComponent } from "./movie-item.component";
+import { Movie } from "../models/movie.model";
+import { ActivatedRoute } from "@angular/router";
 
-describe('MovieItemComponent', () => {
+describe("MovieItemComponent", () => {
   let fixture: ComponentFixture<MovieItemComponent>;
   let component: MovieItemComponent;
 
   const movieMock: Movie = {
-    id: '1',
-    title: 'Inception',
-    release_date: '2010-07-16',
+    id: "1",
+    title: "Inception",
+    release_date: "2010-07-16",
     budget: 160000000,
     duration: 148,
   } as Movie;
@@ -37,22 +37,22 @@ describe('MovieItemComponent', () => {
     fixture = TestBed.createComponent(MovieItemComponent);
     component = fixture.componentInstance;
 
-    fixture.componentRef.setInput('movie', movieMock);
+    fixture.componentRef.setInput("movie", movieMock);
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render movie information correctly', () => {
+  it("should render movie information correctly", () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
-    const title = compiled.querySelector('h4');
+    const title = compiled.querySelector("h4");
     expect(title).not.toBeNull();
     expect(title!.textContent).toContain(movieMock.title);
 
-    const subtitleSpans = compiled.querySelectorAll('.subtitle span');
+    const subtitleSpans = compiled.querySelectorAll(".subtitle span");
     expect(subtitleSpans.length).toBe(3);
 
     // release_date
@@ -63,29 +63,29 @@ describe('MovieItemComponent', () => {
     expect(subtitleSpans[2].textContent?.trim().length).toBeGreaterThan(0); // duration
   });
 
-  it('should not have active class on star icon when isFavorite is false (default)', () => {
+  it("should not have active class on star icon when isFavorite is false (default)", () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const star = compiled.querySelector('.icon-star') as HTMLElement | null;
+    const star = compiled.querySelector(".icon-star") as HTMLElement | null;
 
     expect(star).not.toBeNull();
-    expect(star!.classList.contains('active')).toBe(false);
+    expect(star!.classList.contains("active")).toBe(false);
   });
 
-  it('should add active class on star icon when isFavorite is true', () => {
+  it("should add active class on star icon when isFavorite is true", () => {
     // altera o input signal isFavorite
-    fixture.componentRef.setInput('isFavorite', true);
+    fixture.componentRef.setInput("isFavorite", true);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const star = compiled.querySelector('.icon-star') as HTMLElement | null;
+    const star = compiled.querySelector(".icon-star") as HTMLElement | null;
 
     expect(star).not.toBeNull();
-    expect(star!.classList.contains('active')).toBe(true);
+    expect(star!.classList.contains("active")).toBe(true);
   });
 
-  it('should emit toggleFavorite with movie when star icon is clicked', () => {
+  it("should emit toggleFavorite with movie when star icon is clicked", () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const star = compiled.querySelector('.icon-star') as HTMLElement | null;
+    const star = compiled.querySelector(".icon-star") as HTMLElement | null;
     expect(star).not.toBeNull();
 
     const emitSpy = jest.fn();
@@ -97,14 +97,14 @@ describe('MovieItemComponent', () => {
     expect(emitSpy).toHaveBeenCalledWith(movieMock);
   });
 
-  it('should set button routerLink to movie details page', () => {
+  it("should set button routerLink to movie details page", () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const button = compiled.querySelector('button') as HTMLButtonElement | null;
+    const button = compiled.querySelector("button") as HTMLButtonElement | null;
 
     expect(button).not.toBeNull();
 
     // Se o Angular refletir o [routerLink], validamos o valor
-    const reflectedRouterLink = button!.getAttribute('ng-reflect-router-link');
+    const reflectedRouterLink = button!.getAttribute("ng-reflect-router-link");
     if (reflectedRouterLink) {
       expect(reflectedRouterLink).toBe(`details/${movieMock.id}`);
     }
